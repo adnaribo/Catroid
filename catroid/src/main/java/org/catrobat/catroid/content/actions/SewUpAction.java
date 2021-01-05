@@ -25,6 +25,7 @@ package org.catrobat.catroid.content.actions;
 import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
 
 import org.catrobat.catroid.content.Sprite;
+import org.catrobat.catroid.embroidery.DSTPatternManager;
 import org.catrobat.catroid.embroidery.DSTStitchCommand;
 import org.catrobat.catroid.stage.StageActivity;
 
@@ -41,27 +42,27 @@ public class SewUpAction extends TemporalAction {
 		float x = sprite.look.getXInUserInterfaceDimensionUnit();
 		float y = sprite.look.getYInUserInterfaceDimensionUnit();
 		StageActivity.stageListener.embroideryPatternManager.addStitchCommand(new DSTStitchCommand(x, y,
-				sprite.look.getZIndex(), sprite));
+				sprite.look.getZIndex(), sprite, sprite.getEmbroideryThreadColor()));
 
 		x += STEPS * Math.sin(radians);
 		y += STEPS * Math.cos(radians);
 		StageActivity.stageListener.embroideryPatternManager.addStitchCommand(new DSTStitchCommand(x, y,
-				sprite.look.getZIndex(), sprite));
+				sprite.look.getZIndex(), sprite, sprite.getEmbroideryThreadColor()));
 
 		x -= STEPS * Math.sin(radians);
 		y -= STEPS * Math.cos(radians);
 		StageActivity.stageListener.embroideryPatternManager.addStitchCommand(new DSTStitchCommand(x, y,
-				sprite.look.getZIndex(), sprite));
+				sprite.look.getZIndex(), sprite, sprite.getEmbroideryThreadColor()));
 
 		x -= STEPS * Math.sin(radians);
 		y -= STEPS * Math.cos(radians);
 		StageActivity.stageListener.embroideryPatternManager.addStitchCommand(new DSTStitchCommand(x, y,
-				sprite.look.getZIndex(), sprite));
+				sprite.look.getZIndex(), sprite, sprite.getEmbroideryThreadColor()));
 
 		x += STEPS * Math.sin(radians);
 		y += STEPS * Math.cos(radians);
 		StageActivity.stageListener.embroideryPatternManager.addStitchCommand(new DSTStitchCommand(x, y,
-				sprite.look.getZIndex(), sprite));
+				sprite.look.getZIndex(), sprite, sprite.getEmbroideryThreadColor()));
 
 		sprite.runningStitch.setStartCoordinates(sprite.look.getXInUserInterfaceDimensionUnit(),
 				sprite.look.getYInUserInterfaceDimensionUnit());

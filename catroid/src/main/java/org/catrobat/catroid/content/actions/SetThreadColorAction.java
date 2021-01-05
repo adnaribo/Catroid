@@ -22,29 +22,60 @@
  */
 package org.catrobat.catroid.content.actions;
 
+import android.util.Log;
+
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
 
 import org.catrobat.catroid.content.Sprite;
 import org.catrobat.catroid.embroidery.DSTPatternManager;
-import org.catrobat.catroid.embroidery.DSTStitchCommand;
+import org.catrobat.catroid.formulaeditor.Formula;
+import org.catrobat.catroid.formulaeditor.InterpretationException;
 import org.catrobat.catroid.stage.StageActivity;
 
-public class StitchAction extends TemporalAction {
+public class SetThreadColorAction extends TemporalAction {
 
 	private Sprite sprite;
+	private Formula red;
+	private Formula green;
+	private Formula blue;
 
 	@Override
 	protected void update(float delta) {
-		sprite.runningStitch.pause();
-		float x = sprite.look.getXInUserInterfaceDimensionUnit();
-		float y = sprite.look.getYInUserInterfaceDimensionUnit();
-		StageActivity.stageListener.embroideryPatternManager.addStitchCommand(new DSTStitchCommand(x, y,
-				sprite.look.getZIndex(), sprite, sprite.getEmbroideryThreadColor()));
-		sprite.runningStitch.setStartCoordinates(x, y);
-		sprite.runningStitch.resume();
+		try {
+			int redInt = 0;
+			int greenInt = 0;
+			int blueInt = 0;
+			if (red != null) {
+				redInt = red.interpretInteger(sprite);
+			}
+			if (green != null) {
+				greenInt = green.interpretInteger(sprite);
+			}
+			if (blue != null) {
+				blueInt = blue.interpretInteger(sprite);
+			}
+			Color color = new Color();
+			Color.argb8888ToColor(color, android.graphics.Color.argb(0xFF, redInt, greenInt, blueInt));
+			sprite.setEmbroideryThreadColor(color);
+		} catch (InterpretationException interpretationException) {
+			Log.d(getClass().getSimpleName(), "Formula interpretation for this specific Brick failed.", interpretationException);
+		}
 	}
 
 	public void setSprite(Sprite sprite) {
 		this.sprite = sprite;
+	}
+
+	public void setRed(Formula red) {
+		this.red = red;
+	}
+
+	public void setGreen(Formula green) {
+		this.green = green;
+	}
+
+	public void setBlue(Formula blue) {
+		this.blue = blue;
 	}
 }

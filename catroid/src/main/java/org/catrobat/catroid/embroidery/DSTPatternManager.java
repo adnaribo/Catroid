@@ -23,6 +23,8 @@
 
 package org.catrobat.catroid.embroidery;
 
+import com.badlogic.gdx.graphics.Color;
+
 import org.catrobat.catroid.content.Sprite;
 
 import java.util.ArrayList;
@@ -67,7 +69,7 @@ public class DSTPatternManager implements EmbroideryPatternManager {
 			if (iterator.hasNext() && !stitchPoints.isEmpty()) {
 				StitchPoint lastValidPoint = stitchPoints.get(stitchPoints.size() - 1);
 				stream.addColorChange();
-				stream.addStitchPoint(lastValidPoint.getX(), lastValidPoint.getY());
+				stream.addStitchPoint(lastValidPoint.getX(), lastValidPoint.getY(), lastValidPoint.getColor());
 			}
 		}
 		return stream;

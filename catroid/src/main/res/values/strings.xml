@@ -1033,6 +1033,7 @@
     <string name="brick_write_embroidery">Write embroidery data to file</string>
     <string name="brick_default_embroidery_file">embroidery.dst</string>
     <string name="brick_sew_up">Sew up</string>
+    <string name="brick_thread_color">Set thread color to</string>
     <!--  -->
 
     <!-- Device bricks -->
